@@ -9,7 +9,7 @@ ENV INSTALLER_SCRIPTS=/virtual-environments/images/linux/scripts/installers
 ENV HELPER_SCRIPTS=/virtual-environments/images/linux/scripts/helpers
 ADD packages /packages
 RUN apt-get update && \
-    apt-get instsall -y software-properties-common && \
+    apt-get install -y software-properties-common && \
     add-apt-repository ppa:longsleep/golang-backports && \
     apt-get install golang-go && \
     git clone https://github.com/actions/virtual-environments && \
