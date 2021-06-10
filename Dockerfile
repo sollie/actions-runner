@@ -1,4 +1,8 @@
 FROM summerwind/actions-runner:latest
+
+LABEL maintainer "Pål Sollie <sollie@sparkz.no>"
+LABEL org.opencontainers.image.source https://github.com/sollie/actions-runner
+
 USER root
 ENV DEBIAN_FRONTEND=noninteractive
 ENV INSTALLER_SCRIPTS=/virtual-environments/images/linux/scripts/installers
