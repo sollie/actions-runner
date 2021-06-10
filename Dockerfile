@@ -8,7 +8,11 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV INSTALLER_SCRIPTS=/virtual-environments/images/linux/scripts/installers
 ENV HELPER_SCRIPTS=/virtual-environments/images/linux/scripts/helpers
 ADD packages /packages
-RUN git clone https://github.com/actions/virtual-environments && \
+RUN apt-get update && \
+    apt-get instsall -y software-properties-common && \
+    add-apt-repository ppa:longsleep/golang-backports && \
+    apt-get install golang-go && \
+    git clone https://github.com/actions/virtual-environments && \
     echo "#!/bin/bash" > $HELPER_SCRIPTS/invoke-tests.sh && \
     chmod +x $HELPER_SCRIPTS/invoke-tests.sh && \
     ln -s $HELPER_SCRIPTS/invoke-tests.sh /usr/local/bin/invoke_tests && \
