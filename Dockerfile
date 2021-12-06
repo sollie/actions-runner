@@ -4,6 +4,7 @@ LABEL maintainer "Pål Sollie <sollie@sparkz.no>"
 LABEL org.opencontainers.image.source https://github.com/sollie/actions-runner
 
 ARG TARGETPLATFORM
+ARG RUNNER_VERSION
 ARG DOCKER_CHANNEL=stable
 ARG DOCKER_VERSION=20.10.8
 ARG DUMB_INIT_VERSION=1.2.5
@@ -19,7 +20,35 @@ RUN apt-get update && \
     apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:longsleep/golang-backports && \
     add-apt-repository -y ppa:git-core/ppa && \
-    apt-get install -y golang-go git  && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+    ca-certificates \
+    dnsutils \
+    ftp \
+    git \
+    golang-go \
+    iproute2 \
+    iputils-ping \
+    jq \
+    libunwind8 \
+    locales \
+    netcat \
+    openssh-client \
+    parallel \
+    python3-pip \
+    rsync \
+    shellcheck \
+    sudo \
+    telnet \
+    time \
+    tzdata \
+    unzip \
+    upx \
+    wget \
+    zip \
+    zstd && \
     git clone https://github.com/actions/virtual-environments && \
     echo "#!/bin/bash" > $HELPER_SCRIPTS/invoke-tests.sh && \
     chmod +x $HELPER_SCRIPTS/invoke-tests.sh && \
@@ -40,7 +69,7 @@ RUN export ARCH=$(echo ${TARGETPLATFORM} | cut -d / -f2) && \
     chmod +x /usr/local/bin/dumb-init
 
 # Docker download supports arm64 as aarch64 & amd64 / i386 as x86_64
-RUN set -vx; && \
+RUN set -vx; \
     export ARCH=$(echo ${TARGETPLATFORM} | cut -d / -f2)  && \
     if [ "$ARCH" = "arm64" ]; then export ARCH=aarch64 ; fi && \
     if [ "$ARCH" = "amd64" ] || [ "$ARCH" = "i386" ]; then export ARCH=x86_64 ; fi && \
