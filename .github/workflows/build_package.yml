@@ -3,7 +3,7 @@ name: 'build package'
 on:
   push:
     tags:
-    - '*'
+      - '*'
 
 jobs:
   build:
