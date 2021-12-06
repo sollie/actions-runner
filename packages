@@ -8,8 +8,6 @@ curl
 dnsutils
 ftp
 gcc
-git
-git
 github-cli
 google-cloud-sdk
 iproute2

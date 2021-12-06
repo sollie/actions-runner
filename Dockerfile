@@ -20,7 +20,7 @@ RUN apt-get update && \
     apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:longsleep/golang-backports && \
     add-apt-repository -y ppa:git-core/ppa && \
-    apt-get install -y golang-go && \
+    apt-get install -y golang-go git && \
     git clone https://github.com/actions/virtual-environments && \
     echo "#!/bin/bash" > $HELPER_SCRIPTS/invoke-tests.sh && \
     chmod +x $HELPER_SCRIPTS/invoke-tests.sh && \
