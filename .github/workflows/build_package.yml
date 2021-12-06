@@ -11,10 +11,12 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-      - id: prep
+
+      - id: hash
         if: "startsWith(github.ref, 'refs/tags/v')"
         run: |
           echo ::set-output name=tags::${GITHUB_REF#refs/tags/v}
+
       - name: Set up Docker Buildx
         id:   buildx
         uses: docker/setup-buildx-action@v1
