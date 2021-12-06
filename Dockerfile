@@ -17,17 +17,16 @@ ENV INSTALLER_SCRIPTS=/virtual-environments/images/linux/scripts/installers
 ENV HELPER_SCRIPTS=/virtual-environments/images/linux/scripts/helpers
 ADD packages /packages
 RUN apt-get update && \
+    apt-get install -y --no-install-recommends dpkg apt-utils && \
     apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:longsleep/golang-backports && \
     add-apt-repository -y ppa:git-core/ppa && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
-    apt-utils \
     build-essential \
     curl \
     ca-certificates \
     dnsutils \
-    dpkg \
     ftp \
     git \
     golang-go \
