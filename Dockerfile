@@ -4,7 +4,6 @@ LABEL maintainer "Pål Sollie <sollie@sparkz.no>"
 LABEL org.opencontainers.image.source https://github.com/sollie/actions-runner
 
 ARG TARGETPLATFORM
-#ARG RUNNER_VERSION=2.280.3
 ARG DOCKER_CHANNEL=stable
 ARG DOCKER_VERSION=20.10.8
 ARG DUMB_INIT_VERSION=1.2.5
@@ -20,11 +19,12 @@ RUN apt-get update && \
     apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:longsleep/golang-backports && \
     add-apt-repository -y ppa:git-core/ppa && \
-    for f in $(cat packages); do bash "${INSTALLER_SCRIPTS}/$f.sh"; done && \
+    apt-get install -y golang-go git  && \
     git clone https://github.com/actions/virtual-environments && \
     echo "#!/bin/bash" > $HELPER_SCRIPTS/invoke-tests.sh && \
     chmod +x $HELPER_SCRIPTS/invoke-tests.sh && \
     ln -s $HELPER_SCRIPTS/invoke-tests.sh /usr/local/bin/invoke_tests && \
+    for f in $(cat packages); do bash "${INSTALLER_SCRIPTS}/$f.sh"; done && \
     bash ${INSTALLER_SCRIPTS}/dpkg-config.sh && \
     ln -sf /usr/bin/python3 /usr/bin/python && \
     ln -sf /usr/bin/pip3 /usr/bin/pip && \
