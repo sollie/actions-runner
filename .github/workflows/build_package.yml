@@ -37,7 +37,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           build-args: |
-            RUNNER_VERSION=${{ steps.hash.outputs.sha_short }}
+            RUNNER_VERSION=${{ steps.hash.outputs.tag }}
             DOCKER_VERSION=${{ env.DOCKER_VERSION }}
           platforms: linux/amd64,linux/arm64
           cache-from: type=gha
