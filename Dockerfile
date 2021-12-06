@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM public.ecr.aws/lts/ubuntu:20.04
 
 LABEL maintainer "Pål Sollie <sollie@sparkz.no>"
 LABEL org.opencontainers.image.source https://github.com/sollie/actions-runner
