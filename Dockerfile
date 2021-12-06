@@ -4,7 +4,7 @@ LABEL maintainer "Pål Sollie <sollie@sparkz.no>"
 LABEL org.opencontainers.image.source https://github.com/sollie/actions-runner
 
 ARG TARGETPLATFORM
-ARG RUNNER_VERSION=2.280.3
+#ARG RUNNER_VERSION=2.280.3
 ARG DOCKER_CHANNEL=stable
 ARG DOCKER_VERSION=20.10.8
 ARG DUMB_INIT_VERSION=1.2.5
