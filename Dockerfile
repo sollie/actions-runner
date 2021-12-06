@@ -22,10 +22,12 @@ RUN apt-get update && \
     add-apt-repository -y ppa:git-core/ppa && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
+    apt-utils \
     build-essential \
     curl \
     ca-certificates \
     dnsutils \
+    dpkg \
     ftp \
     git \
     golang-go \
