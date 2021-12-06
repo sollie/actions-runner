@@ -12,7 +12,7 @@ ARG DUMB_INIT_VERSION=1.2.5
 RUN test -n "$TARGETPLATFORM" || (echo "TARGETPLATFORM must be set" && false)
 
 USER root
-ENV DEBIAN_FRONTEND=noninteractive
+ARG DEBIAN_FRONTEND=noninteractive
 ENV INSTALLER_SCRIPTS=/virtual-environments/images/linux/scripts/installers
 ENV HELPER_SCRIPTS=/virtual-environments/images/linux/scripts/helpers
 ADD packages /packages
