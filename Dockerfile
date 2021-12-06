@@ -1,4 +1,4 @@
-FROM public.ecr.aws/lts/ubuntu:20.04
+FROM ubuntu:20.04
 
 LABEL maintainer "Pål Sollie <sollie@sparkz.no>"
 LABEL org.opencontainers.image.source https://github.com/sollie/actions-runner
@@ -17,7 +17,6 @@ ENV INSTALLER_SCRIPTS=/virtual-environments/images/linux/scripts/installers
 ENV HELPER_SCRIPTS=/virtual-environments/images/linux/scripts/helpers
 ADD packages /packages
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends dpkg apt-utils && \
     apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:longsleep/golang-backports && \
     add-apt-repository -y ppa:git-core/ppa && \
