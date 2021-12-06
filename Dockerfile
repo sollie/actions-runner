@@ -20,13 +20,12 @@ RUN apt-get update && \
     apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:longsleep/golang-backports && \
     add-apt-repository -y ppa:git-core/ppa && \
-    apt-get install -y golang-go git && \
+    for f in $(cat packages); do bash "${INSTALLER_SCRIPTS}/$f.sh"; done && \
     git clone https://github.com/actions/virtual-environments && \
     echo "#!/bin/bash" > $HELPER_SCRIPTS/invoke-tests.sh && \
     chmod +x $HELPER_SCRIPTS/invoke-tests.sh && \
     ln -s $HELPER_SCRIPTS/invoke-tests.sh /usr/local/bin/invoke_tests && \
     bash ${INSTALLER_SCRIPTS}/dpkg-config.sh && \
-    for f in $(cat packages); do bash "${INSTALLER_SCRIPTS}/$f.sh"; done && \
     ln -sf /usr/bin/python3 /usr/bin/python && \
     ln -sf /usr/bin/pip3 /usr/bin/pip && \
     rm -rf /var/lib/apt/lists/* && \

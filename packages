@@ -8,7 +8,9 @@ curl
 dnsutils
 ftp
 gcc
+git
 github-cli
+golang-go
 google-cloud-sdk
 iproute2
 iputils-ping
