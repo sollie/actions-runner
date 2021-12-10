@@ -11,6 +11,20 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    name: Build ${{ matrix.name }}-${{ matrix.os-name }}-${{ matrix.os-version }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: actions-runner
+            os-name: ubuntu
+            os-version: 20.04
+            dockerfile: Dockerfile
+          - name: actions-runner-dind
+            os-name: ubuntu
+            os-version: 20.04
+            dockerfile: Dockerfile.dind
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -38,7 +52,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./
-          file: ./Dockerfile
+          file: ./${{ matrix.dockerfile }}
           build-args: |
             RUNNER_VERSION=${{ steps.hash.outputs.tag }}
             DOCKER_VERSION=${{ env.DOCKER_VERSION }}
@@ -47,5 +61,5 @@ jobs:
           cache-to: type=gha,mode=max
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${{ steps.hash.outputs.tag }}
+            ghcr.io/${{ github.repository }}/${{ matrix.name }}:latest
+            ghcr.io/${{ github.repository }}/${{ matrix.name }}:${{ steps.hash.outputs.tag }}
