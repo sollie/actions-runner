@@ -2,11 +2,12 @@ name: 'build package'
 
 on:
   push:
-    tags:
-      - '*'
+    branch:
+      - main
 
 env:
   DOCKER_VERSION: 20.10.8
+  RUNNER_VERSION: 2.285.1
 
 jobs:
   build:
@@ -29,10 +30,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - id: hash
-        if: "startsWith(github.ref, 'refs/tags/v')"
+      - name: Get short SHA
+        id: sha_short
         run: |
-          echo ::set-output name=tag::${GITHUB_REF#refs/tags/v}
+          echo ::set-output name=sha_short::${GITHUB_SHA::7}}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -59,7 +60,8 @@ jobs:
           platforms: linux/amd64,linux/arm64
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          push: true
+          push: ${{ github.ref == 'main' && github.event.pull_request.merged == true }}
           tags: |
             ghcr.io/${{ github.repository }}/${{ matrix.name }}:latest
-            ghcr.io/${{ github.repository }}/${{ matrix.name }}:${{ steps.hash.outputs.tag }}
+            ghcr.io/${{ github.repository }}/${{ matrix.name }}:v${{ env.RUNNER_VERSION }}
+            ghcr.io/${{ github.repository }}/${{ matrix.name }}:v${{ env.RUNNER_VERSION }}-${{ steps.hash.outputs.sha_short }}
