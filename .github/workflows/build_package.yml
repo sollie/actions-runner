@@ -69,4 +69,4 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository }}/${{ matrix.name }}:latest
             ghcr.io/${{ github.repository }}/${{ matrix.name }}:v${{ env.RUNNER_VERSION }}
-            ghcr.io/${{ github.repository }}/${{ matrix.name }}:v${{ env.RUNNER_VERSION }}-${{ steps.hash.outputs.sha_short }}
+            ghcr.io/${{ github.repository }}/${{ matrix.name }}:v${{ env.RUNNER_VERSION }}-${{ steps.sha_short.outputs.sha_short }}
