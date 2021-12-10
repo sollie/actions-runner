@@ -1,9 +1,6 @@
 name: 'build package'
 
 on:
-  push:
-    branch:
-      - main
   pull_request:
     branches:
       - main
@@ -63,7 +60,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          push: ${{ github.ref == 'main' && github.event.pull_request.merged == true }}
+          push: ${{ github.event.action == 'closed' && github.event.pull_request.merged == true }}
           tags: |
             ghcr.io/${{ github.repository }}/${{ matrix.name }}:latest
             ghcr.io/${{ github.repository }}/${{ matrix.name }}:v${{ env.RUNNER_VERSION }}
