@@ -63,7 +63,7 @@ jobs:
             RUNNER_VERSION=${{ env.RUNNER_VERSION }}
             DOCKER_VERSION=${{ env.DOCKER_VERSION }}
           platforms: linux/amd64,linux/arm64
-          cache-from: type=gha,ref=
+          cache-from: type=gha
           cache-to: type=gha,mode=max
           push: ${{ github.event.action == 'closed' && github.event.pull_request.merged == true }}
           tags: |
