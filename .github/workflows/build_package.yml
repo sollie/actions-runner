@@ -4,6 +4,10 @@ on:
   push:
     branch:
       - main
+      - updates
+  pull_request:
+    branches:
+      - main
 
 env:
   DOCKER_VERSION: 20.10.8
