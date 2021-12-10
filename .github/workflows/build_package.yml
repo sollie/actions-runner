@@ -59,7 +59,7 @@ jobs:
           context: ./
           file: ./${{ matrix.dockerfile }}
           build-args: |
-            RUNNER_VERSION=${{ steps.hash.outputs.tag }}
+            RUNNER_VERSION=${{ env.RUNNER_VERSION }}
             DOCKER_VERSION=${{ env.DOCKER_VERSION }}
           platforms: linux/amd64,linux/arm64
           cache-from: type=gha
