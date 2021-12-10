@@ -38,7 +38,7 @@ jobs:
       - name: Get short SHA
         id: sha_short
         run: |
-          echo ::set-output name=sha_short::${GITHUB_SHA::7}}
+          echo ::set-output name=sha_short::${GITHUB_SHA::7}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -69,4 +69,4 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository }}/${{ matrix.name }}:latest
             ghcr.io/${{ github.repository }}/${{ matrix.name }}:v${{ env.RUNNER_VERSION }}
-            ghcr.io/${{ github.repository }}/${{ matrix.name }}:v${{ env.RUNNER_VERSION }}-${{ steps.hash.outputs.sha_short }}
+            ghcr.io/${{ github.repository }}/${{ matrix.name }}:v${{ env.RUNNER_VERSION }}-${{ steps.sha_short.outputs.sha_short }}
