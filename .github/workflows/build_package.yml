@@ -2,6 +2,11 @@ name: 'build package'
 
 on:
   pull_request:
+    types: 
+      - opened
+      - synchronize
+      - reopened
+      - closed
     branches:
       - main
 
@@ -58,7 +63,7 @@ jobs:
             RUNNER_VERSION=${{ env.RUNNER_VERSION }}
             DOCKER_VERSION=${{ env.DOCKER_VERSION }}
           platforms: linux/amd64,linux/arm64
-          cache-from: type=gha
+          cache-from: type=gha,ref=
           cache-to: type=gha,mode=max
           push: ${{ github.event.action == 'closed' && github.event.pull_request.merged == true }}
           tags: |
