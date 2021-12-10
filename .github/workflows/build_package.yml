@@ -38,7 +38,7 @@ jobs:
       - name: Get short SHA
         id: sha_short
         run: |
-          echo ::set-output name=sha_short::${GITHUB_SHA::7}}
+          echo ::set-output name=sha_short::${GITHUB_SHA::7}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
