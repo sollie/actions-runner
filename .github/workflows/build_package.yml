@@ -11,8 +11,8 @@ on:
       - main
 
 env:
-  DOCKER_VERSION: 20.10.13
-  RUNNER_VERSION: 2.289.2
+  DOCKER_VERSION: 20.10.14
+  RUNNER_VERSION: 2.290.1
 
 jobs:
   build:
