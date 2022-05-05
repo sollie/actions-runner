@@ -6,7 +6,7 @@ LABEL org.opencontainers.image.source https://github.com/sollie/actions-runner
 ARG TARGETPLATFORM
 ARG RUNNER_VERSION
 ARG DOCKER_CHANNEL=stable
-ARG DOCKER_VERSION=20.10.8
+ARG DOCKER_VERSION=20.10.14
 ARG DUMB_INIT_VERSION=1.2.5
 
 RUN test -n "$TARGETPLATFORM" || (echo "TARGETPLATFORM must be set" && false)
