@@ -27,6 +27,8 @@ RUN apt-get update \
     && curl -f -L -o nodesource.gpg.key https://deb.nodesource.com/gpgkey/nodesource.gpg.key \
     && apt-key add nodesource.gpg.key \
     && echo "deb https://deb.nodesource.com/node_16.x focal main" >> /etc/apt/sources.list.d/nodesource.list \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
        build-essential \
        ca-certificates \
        dnsutils \
