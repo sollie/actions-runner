@@ -6,7 +6,7 @@ LABEL org.opencontainers.image.source https://github.com/sollie/actions-runner
 ARG TARGETPLATFORM
 ARG RUNNER_VERSION
 ARG DOCKER_CHANNEL=stable
-ARG DOCKER_VERSION=20.10.8
+ARG DOCKER_VERSION=20.10.14
 ARG DUMB_INIT_VERSION=1.2.5
 
 RUN test -n "$TARGETPLATFORM" || (echo "TARGETPLATFORM must be set" && false)
@@ -17,13 +17,19 @@ ENV INSTALLER_SCRIPTS=/virtual-environments/images/linux/scripts/installers
 ENV HELPER_SCRIPTS=/virtual-environments/images/linux/scripts/helpers
 ADD packages /packages
 RUN apt-get update \
+    && apt-get install -y \
+       curl \
+       gnupg \
+    && apt-get update \
     && apt-get install -y software-properties-common \
     && add-apt-repository -y ppa:longsleep/golang-backports \
     && add-apt-repository -y ppa:git-core/ppa \
+    && curl -f -L -o nodesource.gpg.key https://deb.nodesource.com/gpgkey/nodesource.gpg.key \
+    && apt-key add nodesource.gpg.key \
+    && echo "deb https://deb.nodesource.com/node_16.x focal main" >> /etc/apt/sources.list.d/nodesource.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
        build-essential \
-       curl \
        ca-certificates \
        dnsutils \
        ftp \
@@ -49,6 +55,7 @@ RUN apt-get update \
        wget \
        zip \
        zstd \
+       nodejs \
     && git clone https://github.com/actions/virtual-environments \
     && echo "#!/bin/bash" > $HELPER_SCRIPTS/invoke-tests.sh \
     && chmod +x $HELPER_SCRIPTS/invoke-tests.sh \
