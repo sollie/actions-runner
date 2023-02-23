@@ -12,7 +12,7 @@ on:
 
 env:
   DOCKER_VERSION: 20.10.14
-  RUNNER_VERSION: 2.290.1
+  RUNNER_VERSION: 2.302.1
 
 jobs:
   build:
